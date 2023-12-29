@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { notification } from "antd";
+import { ThumbsUp } from "lucide-react";
 
 const FeedbackForm = () => {
   const { client, auditName } = useParams();
   const [feedback, setFeedback] = useState("");
-  const [isSubmitted, setSubmitted] = useState(false);
 
   const handleFeedbackChange = (e) => {
     setFeedback(e.target.value);
   };
 
   const handleSubmit = () => {
-    setSubmitted(true);
+    notification.open({
+      message: "Feedback Submitted",
+      description: "Thank you for your feedback!",
+      icon: <ThumbsUp />,
+      duration: 100,
+    });
   };
 
   return (
@@ -32,7 +38,6 @@ const FeedbackForm = () => {
         >
           Submit Feedback
         </button>
-        {isSubmitted && <p>Feedback submitted successfully!</p>}
       </div>
     </div>
   );
